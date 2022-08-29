@@ -1,0 +1,30 @@
+﻿<Window x:Class="Birdy_Browser.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Birdy_Browser"
+        mc:Ignorable="d"
+        Title="Settings" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <DockPanel>
+                <Label>Theme Path</Label>
+                <TextBox Name="Tpath"></TextBox>
+            </DockPanel>
+            <DockPanel>
+                <Label>Homepage Url</Label>
+                <TextBox Name="Hurl"></TextBox>
+            </DockPanel>
+            <DockPanel>
+                <Label>Search Url</Label>
+                <TextBox Name="Surl"></TextBox>
+            </DockPanel>
+            <CheckBox IsChecked="True" Name="LPicons">Load Page Favicons</CheckBox>
+            <Label>Show Bookmarks</Label>
+            <RadioButton GroupName="shb" Name="shbOptionNever">Never</RadioButton>
+            <RadioButton GroupName="shb" Name="shbOptionAlways">Always</RadioButton>
+            <RadioButton GroupName="shb" Name="shbOptionOIN">Only In New Tabs</RadioButton>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

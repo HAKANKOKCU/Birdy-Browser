@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Birdy Browser</title>
+		<style>
+			*,*::before,*::after {
+			  box-sizing: border-box;
+			  font-weight: normal;
+			}
+			body, html {
+			  font-family: Verdana, sans-serif;
+			  margin: 0;
+			  --animate-speed: 1s;
+			  min-height: 100% !important;
+			  height: 100%;
+			}
+			body {
+			  min-height: 100% !important;
+			  width: 100%;
+			}
+			body.dark {
+			  background-color: rgb(20,20,20);
+			  color:white;
+			}
+			body.dark * {
+			  scrollbar-color: rgb(200,200,200) rgb(50,50,50) !important;
+			}
+
+			.limon.pill {
+			  border-radius: 40px;
+			  padding: 4px;
+			}
+			.limon.rounded {
+				border-radius: 5px;
+			}
+
+			.limon.darkshandow.always {
+			  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			}
+			.limon.lightshandow.always {
+			  box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+			}
+
+			.limon.darkshandow:hover {
+			  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			}
+			.limon.lightshandow:hover {
+			  box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+			}
+
+
+			button.limon {
+			  padding: 5px;
+			}
+			button.limon.dark {
+			  background-color: rgb(44, 44, 44);
+			  border: none;
+			  color: white;
+			}
+			button.limon.dark:hover {
+			  background-color: rgb(64,64,64)
+			}
+			button.limon.dark:active {
+			  background-color: rgb(10,10,10)
+			}
+			button.limon.dark:focus {
+			  outline: solid white 2px;
+			}
+
+			button.limon.light {
+			  background-color: rgb(230, 230, 230);
+			  border: none;
+			  color:black;
+			}
+			button.limon.light:hover {
+			  background-color: rgb(210,210,210)
+			}
+			button.limon.light:active {
+			  background-color: rgb(240,240,240)
+			}
+			button.limon.light:focus {
+			  outline: solid black 2px;
+			}
+
+
+			input.limon {
+			  border-radius: 2px
+			}
+			input.limon.dark {
+			  background-color: rgb(44, 44, 44);
+			  border: transparent solid 2px;
+			  color: white;
+			}
+			input.limon.dark:hover {
+			  border: rgb(64,64,64) solid 2px;
+			}
+			input.limon.dark:active {
+			  border: rgb(10,10,10) solid 2px;
+			}
+			input.limon.dark:focus {
+			  border: rgb(200,200,200) solid 2px;
+			  outline: none;
+			}
+
+			input.limon.light {
+			  background-color: rgb(230, 230, 230);
+			  border: transparent solid 2px;
+			  color:black;
+			}
+			input.limon.light:hover {
+			  border: rgb(210,210,210) solid 2px;
+			}
+			input.limon.light:active {
+			  border: rgb(240,240,240) solid 2px;
+			}
+			input.limon.light:focus {
+			  border: rgb(0,0,0) solid 2px;
+			  outline: none;
+			}
+
+
+			select.limon.light {
+			  background-color: rgb(250,250,250);
+			  border: transparent solid 2px;
+			  color:black
+			}
+			select.limon.dark {
+			  background-color: rgb(20,20,20);
+			  border: transparent solid 2px;
+			  color:white
+			}
+
+			ul.no-bullets {
+			  list-style-type: none;
+			  margin: 0;
+			  padding: 0;
+			}
+			ul.inside-bul {
+			  list-style-position: inside;
+			}
+			ul.limon.boxed {
+			  list-style-position: inside;
+			  list-style-type: none;
+			  margin: 0;
+			  padding: 0;
+			}
+			ul.limon.boxed > li {
+			  padding: 4px;
+			  border: 1px solid rgba(150,150,150,0.5);
+			  margin: 0
+			}
+
+
+			div.limon.titlebar {
+			  position: sticky;
+			  display: flex;
+			  top:0;
+			  left:0;
+			  right: 0;
+			  width: 100%;
+			  padding: 4px;
+			  z-index: 90;
+			}
+
+			div.limon.titlebar.light {
+			  background-color: rgb(220,220,220);
+			  color:black
+			}
+			div.limon.titlebar.dark {
+			  background-color: rgb(40,40,40);
+			  color: white
+			}
+
+
+			p {padding: 4px;margin: 0}
+
+
+			.block {display: block}
+			.inline-block {display: inline-block}
+			.inline {display: inline}
+			.flex {display: flex}
+			.inline-flex {display: inline-flex}
+			.grid {display: grid}
+
+			.animated {
+			  transition: var(--animate-speed);
+			}
+
+			h1 {margin:2px;padding:0}
+		</style>
+		<style>
+			main {
+				backdrop-filter: blur(4px);
+				width:100%;
+				height:100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				background: radial-gradient(rgba(0,0,0,0), rgba(0,0,0,0.4));
+			}
+			body {background-size: cover !important}
+			#settingsMenu {display:none}
+		</style>
+	</head>
+	<body class="dark">
+		<button class="limon dark pill" style="background-color:rgba(0,0,0,0);position:fixed;top:0;right:0;cursor:pointer;z-index:2;padding:0" onclick="toggleVis('#settingsMenu')">
+			<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" style="width:24px;height:24px;fill:white"><path d="m9.25 22-.4-3.2q-.325-.125-.612-.3-.288-.175-.563-.375L4.7 19.375l-2.75-4.75 2.575-1.95Q4.5 12.5 4.5 12.337v-.675q0-.162.025-.337L1.95 9.375l2.75-4.75 2.975 1.25q.275-.2.575-.375.3-.175.6-.3l.4-3.2h5.5l.4 3.2q.325.125.613.3.287.175.562.375l2.975-1.25 2.75 4.75-2.575 1.95q.025.175.025.337v.675q0 .163-.05.338l2.575 1.95-2.75 4.75-2.95-1.25q-.275.2-.575.375-.3.175-.6.3l-.4 3.2Zm2.8-6.5q1.45 0 2.475-1.025Q15.55 13.45 15.55 12q0-1.45-1.025-2.475Q13.5 8.5 12.05 8.5q-1.475 0-2.488 1.025Q8.55 10.55 8.55 12q0 1.45 1.012 2.475Q10.575 15.5 12.05 15.5Z"/></svg>
+		</button>
+		<div id="settingsMenu" style="position:fixed;top:24px;right:0;z-index:3;padding:6px;backdrop-filter: blur(8px);border-radius:6px;" tabindex="-1"><h1>Settings</h1><button class="limon dark pill" style="background-color:rgba(0,0,0,0);" onclick="toggleVis('#asbutton');toggleVis('.remsp')">
+			Edit Shortcuts
+		</button></div>
+		<main>
+			<div style="width:100%">
+				<center><h1 style="color:white;font-size:50px">Birdy Browser</h1></center>
+				<br>
+				<center><form action="birdy://search">
+					<input autofocus placeholder="Search" class="limon pill dark" name="qe" style="width:40%"/>
+				</form></center>
+				<center><div id="sharea" style="max-width:60%;">
+					
+				</div><a id="asbutton" href="birdy://addhomepagebookmark/" style="display:none;color:white">Add Shortcut</a></center>
+			</div>
+		</main>
+	</body>
+	<script>
+		fetch(`https://source.unsplash.com/1600x900/?flower`).then((response)=> {   
+			document.body.style.background = "url('" + response.url + "') no-repeat center center fixed";
+		});
+		var sid = 0;
+		function addShortcut(icon,name,url) {
+			var fbox = document.createElement("a");
+			fbox.style.display = "inline-flex";
+			fbox.style.width = "66px";
+			fbox.href = url;
+			fbox.style.textDecoration = "none";
+			fbox.style.color = "white";
+			fbox.style.flexDirection = "column";
+			fbox.style.alignItems = "center";
+			var iconobj = document.createElement("img");
+			iconobj.style.width = "50px";
+			iconobj.style.height = "50px";
+			iconobj.src = icon;
+			var titlesp = document.createElement("p");
+			titlesp.innerText = name;
+			fbox.appendChild(iconobj);
+			fbox.appendChild(titlesp);
+			var remsp = document.createElement("a");
+			remsp.classList.add("remsp");
+			remsp.innerText = "Remove"
+			remsp.style.display = "none"
+			remsp.style.color = "red";
+			remsp.href = "birdy://removehomepagebookmark/" + sid + "/{SecurityID}";
+			fbox.appendChild(remsp);
+			var remsp = document.createElement("a");
+			remsp.classList.add("remsp");
+			remsp.innerText = "Edit"
+			remsp.style.display = "none"
+			remsp.href = "birdy://edithomepagebookmark/" + sid + "/{SecurityID}";
+			fbox.appendChild(remsp);
+			var remsp = document.createElement("a");
+			remsp.classList.add("remsp");
+			remsp.innerText = "Move"
+			remsp.style.display = "none"
+			remsp.href = "javascript:moveS(" + sid + ")";
+			fbox.appendChild(remsp);
+			document.getElementById("sharea").appendChild(fbox);
+			sid++;
+		}
+		function moveS(id) {
+			var childid = 0;
+			[].forEach.call(document.getElementById("sharea").children,(elem) => {
+				elem.style.opacity = "";
+				elem.disabled = false;
+				elem.href = "birdy://movehomepagebookmark/" + id + "/" + childid + "/{SecurityID}";
+			childid++;
+			})
+			document.getElementById("sharea").children[id].style.opacity = "0.5";
+			document.getElementById("sharea").children[id].disabled = true;
+			document.getElementById("sharea").children[id].removeAttribute("href");
+			toggleVis('#asbutton');
+			toggleVis('.remsp');
+		}
+		function toggleVis(query) {
+			var elems = document.querySelectorAll(query);
+			[].forEach.call(elems,(elem) => {
+				if (elem.style.display == "block") {
+					elem.style.display = "none"
+				}else {
+					elem.style.display = "block"
+				}
+			})
+		}
+	</script>
+</html>
