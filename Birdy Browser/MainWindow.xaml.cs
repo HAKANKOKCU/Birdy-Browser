@@ -215,7 +215,9 @@ namespace Birdy_Browser
             bsettings.WebGl = CefState.Enabled;
             //BrowserTab.CloseTabCommand = new RelayCommand(_ => CloseTabCommandAction((TabItem)_));
             //BrowserTab.AddTabCommand = new RelayCommand(_ => AddTabCommandAction());
-            dh.OnDownloadUpdatedFired += (object? sender, DownloadItem itm) => {
+            dh.OnDownloadUpdatedFired += (object? sender, object[] its) => {
+                DownloadItem itm = (DownloadItem)its[0];
+                IDownloadItemCallback citm = (IDownloadItemCallback)its[1];
                 if (itm.IsComplete || itm.IsCancelled || itm.IsValid == false || itm.IsInProgress == false)
                 {
                     Dispatcher.Invoke(() =>
@@ -250,6 +252,21 @@ namespace Birdy_Browser
                             Label inf = new();
                             sp.Children.Add(inf);
                             dowsmenu.Items.Add(sp);
+                            StackPanel stacksatus = new();
+                            Button pauseres = new() { Content = "Pause" };
+                            pauseres.Click += (sender, e) => {
+                                if (pauseres.Content == "Pause")
+                                {
+                                    citm.Pause();
+                                    pauseres.Content = "Resume";
+                                }else
+                                {
+                                    citm.Resume();
+                                    pauseres.Content = "Pause";
+                                }
+                            };
+                            stacksatus.Children.Add(pauseres);
+                            sp.Children.Add(stacksatus);
                             dowit.Add(itm.Id, sp);
                             dowprog.Add(itm.Id,0);
                             calcprogtb();

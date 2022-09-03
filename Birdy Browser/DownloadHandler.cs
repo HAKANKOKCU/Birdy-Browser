@@ -10,7 +10,7 @@ namespace CefSharp.Example.Handlers
     {
         public event EventHandler<DownloadItem> OnBeforeDownloadFired;
 
-        public event EventHandler<DownloadItem> OnDownloadUpdatedFired;
+        public event EventHandler<Object[]> OnDownloadUpdatedFired;
 
         public bool CanDownload(IWebBrowser chromiumWebBrowser, IBrowser browser, string url, string requestMethod)
         {
@@ -27,13 +27,15 @@ namespace CefSharp.Example.Handlers
                 using (callback)
                 {
                     callback.Continue(downloadItem.SuggestedFileName, showDialog: true);
+                 
                 }
             }
         }
 
         public void OnDownloadUpdated(IWebBrowser chromiumWebBrowser, IBrowser browser, DownloadItem downloadItem, IDownloadItemCallback callback)
         {
-            OnDownloadUpdatedFired?.Invoke(this, downloadItem);
+            Object[] ds = { downloadItem, callback };
+            OnDownloadUpdatedFired?.Invoke(this, ds);
         }
     }
 }
